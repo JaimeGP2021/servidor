@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <p>El nombre es <?= $_POST['nombre'] ?>, el apellido es <?= $_POST['apellidos'] ?> y el teléfono es <?= $_POST['telefono'] ?> </p>
+    <p>El resultado es <?= $_GET['op1'] + $_GET['op2'] ?></p>
 </body>
 
 </html>
