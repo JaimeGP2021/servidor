@@ -9,75 +9,21 @@
 
 <body>
     <?php
-    $errores = [];
-
     require 'auxiliar.php';
 
-    function comprobar_primer_operando()
-    {
-        comprobar_parametro('op1', "Falta el primer operando.");
-    }
+    $errores = [];
 
-    function comprobar_segundo_operando()
-    {
-        comprobar_parametro('op2', "Falta el segundo operando.");
-    }
+    $op1 = comprobar_primer_operando($errores);
+    $op2 = comprobar_segundo_operando($errores);
+    $op = comprobar_operacion($op2, $errores);
 
-    function comprobar_operacion()
-    {
-        comprobar_parametro('op', "Falta la operación.");
+    if (hay_errores($errores)) {
+        mostrar_mensajes_error($errores);
+    } else {
+        $res = calcular_operacion($op1, $op2, $op);
+        mostrar_resultado($op1, $op2, $op, $res);
     }
-
-    comprobar_primer_operando();
-    if (no_hay_errores()) {
-        $op1 = trim($_GET['op1']);
-        comprobar_no_vacio($op1, "El primer operando es obligatorio.");
-        if (no_hay_errores()) {
-            comprobar_numerico($op1, "El primer operando no es un número.");
-        }
-    }
-
-    comprobar_segundo_operando();
-    if (no_hay_errores()) {
-        $op2 = trim($_GET['op2']);
-        comprobar_no_vacio($op2, "El segundo operando es obligatorio.");
-        if (no_hay_errores()) {
-            comprobar_numerico($op2, "El segundo operando no es un número.");
-        }
-    }
-
-    comprobar_operacion();
-    if (no_hay_errores()) {
-        $op = trim($_GET['op']);
-        comprobar_no_vacio($op, "La operación es obligatoria.");
-        if (!in_array($op, ['+', '-', '*', '/'])) {
-            $errores[] = "Operación incorrecta.";
-        } elseif ($op == '/' && $op2 == '0') {
-            $errores[] = "No se puede dividir entre cero.";
-        }
-    }
-
-    if (!empty($errores)):
-        foreach ($errores as $error): ?>
-            <h3><?= $error ?></h3><?php
-                                endforeach;
-                            else:
-                                switch ($op):
-                                    case '+':
-                                        $res = $op1 + $op2;
-                                        break;
-                                    case '-':
-                                        $res = $op1 - $op2;
-                                        break;
-                                    case '*':
-                                        $res = $op1 * $op2;
-                                        break;
-                                    case '/':
-                                        $res = $op1 / $op2;
-                                        break;
-                                endswitch; ?>
-        <p>La operación <?= $op1 ?> <?= $op ?> <?= $op2 ?> vale <?= $res ?>.</p><?php
-                                                                            endif; ?>
+    ?>
     <a href="calculadora.html"><button>Volver</button></a>
 </body>
 
