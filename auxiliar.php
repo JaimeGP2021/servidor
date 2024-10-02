@@ -90,31 +90,31 @@ function mostrar_mensajes_error($errores)
     foreach ($errores as $mensajes) {
         foreach ($mensajes as $mensaje) { ?>
             <h3><?= $mensaje ?></h3><?php
-                                }
-                            }
-                        }
+        }
+    }
+}
 
-                        function calcular_operacion($op1, $op2, $op)
-                        {
-                            switch ($op) {
-                                case '+':
-                                    $res = $op1 + $op2;
-                                    break;
-                                case '-':
-                                    $res = $op1 - $op2;
-                                    break;
-                                case '*':
-                                    $res = $op1 * $op2;
-                                    break;
-                                case '/':
-                                    $res = $op1 / $op2;
-                                    break;
-                            }
+function calcular_operacion($op1, $op2, $op)
+{
+    switch ($op) {
+        case '+':
+            $res = $op1 + $op2;
+            break;
+        case '-':
+            $res = $op1 - $op2;
+            break;
+        case '*':
+            $res = $op1 * $op2;
+            break;
+        case '/':
+            $res = $op1 / $op2;
+            break;
+    }
 
-                            return $res;
-                        }
+    return $res;
+}
 
-                        function mostrar_resultado($op1, $op2, $op, $res)
-                        { ?>
+function mostrar_resultado($op1, $op2, $op, $res)
+{ ?>
     <p>La operación <?= $op1 ?> <?= $op ?> <?= $op2 ?> vale <?= $res ?>.</p><?php
-                                                                        }
+}
